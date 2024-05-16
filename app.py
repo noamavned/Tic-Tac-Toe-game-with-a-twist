@@ -50,12 +50,19 @@ class Board:
 
     def userTurn(self, s, x: int, y: int) -> str:
         if self.turn == 'x':
-            self.setSpot(s, x, y, 'x')
-            self.turn = 'o'
-            return 'x'
-        self.setSpot(s, x, y, 'o')
-        self.turn = 'x'
-        return 'o'
+            if self.getSpot(x,y) == ' ':
+                self.setSpot(s, x, y, 'x')
+                self.turn = 'o'
+                return 'x'
+            else:
+                return self.getSpot(x,y)
+        if self.turn == 'o':
+            if self.getSpot(x,y) == ' ':
+                self.setSpot(s, x, y, 'o')
+                self.turn = 'x'
+                return 'o'
+            else:
+                return self.getSpot(x,y)
 
     def checkWin(self, player: str) -> bool:
         for row in self.board:
